@@ -1,4 +1,4 @@
-pyFun
+pyFun (Requires pygame)
 =====
 
 pyFun is a just-started WIP python project aiming to mix the simplicity of Gamemaker with the productiveness of Python and Pygame.
