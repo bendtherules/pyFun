@@ -8,4 +8,5 @@ It is similar to Stellar Game Engine, but I wish to make it better.
 
 It is a easier-to-use framework on top of pygame which gives you the ease of Gamemaker, but the code is still python. So, you can use all the good things of the python language. The framework is totally configurable, so that individual parts of it can be turned off and you get ALL and I repeat this, ALL the flexibility of pygame.
 
+You can see the future goals at [Upcoming implementations.markdown](https://github.com/bendtherules/pyFun/blob/master/Upcoming%20implementations.markdown).
 It is a work-in-progress project, so contributers are always welcome.
