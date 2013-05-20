@@ -15,7 +15,7 @@ LEFT=2
 BOTTOM=3
 RIGHT=4
 
-class fun_Game():
+class fun_Game(object):
     list_class=uniquelist()
     list_event=[] # event_list of this step
     list_event_old=[] # event_list of the previous step
@@ -290,7 +290,129 @@ class fun_Class(object):
             return TOP
 
     # end of fun_Class
+# Other classes
+class Circle(object):
+    def __init__(self,(x,y),radius,color=None):
+        self.center=[x,y]
+        self.radius=radius
+        self.color=color
+    @property
+    def center_x(self):
+        return self.center[0]
+    @property
+    def center_y(self):
+        return self.center[1]
+    @center_x.setter
+    def center_x(self,new_x):
+        self.center[0]=new_x
+    @center_y.setter
+    def center_y(self,new_y):
+        self.center[1]=new_y
+    @property
+    def bbox(self):
+        left=self.center_x-self.radius
+        top=self.center_y-self.radius
+        width=self.radius*2
+        height=self.radius*2
+        return pygame.Rect(left, top, width, height)
 
+    def copy(self):
+        return Circle((self.center_x,self.center_y),self.radius,self.color)
+
+    def move(self,move_x,move_y):
+        return Circle((self.center_x+move_x,self.center_y+move_y),self.radius,self.color)
+
+    def move_ip(self,move_x,move_y):
+        self.center_x+=move_x
+        self.center_y+=move_y
+
+    def inflate(self,inflate_radius):
+        return Circle((self.center_x,self.center_y),self.radius+inflate_radius,self.color)
+
+    def inflate_ip(self,inflate_radius):
+        self.radius+=inflate_radius
+
+    def __union(self,((x1,y1),radius_1),((x2,y2),radius_2)):
+        ''' self.__union((new_center_x,new_center_y),new_radius) -> ([x,y],radius) which are the resultant values. '''
+        temp_center_x = float(x1+x2)/2 # Does integer division, losses precision
+        temp_center_y = float(y1+y2)/2
+        temp_radius = float( radius_1 + radius_2 + distance( (x1,y1), (x2,y2) ) )/2
+        return ([temp_center_x,temp_center_y],temp_radius)
+
+    def is_inside(self,another_circle):
+        ''' Checks if this circle is inside another_circle '''
+        return  distance( self.center, another_circle.center )<self.radius
+
+    def is_inside_mutual(self,another_circle):
+        ''' Checks if this circle is inside another_circle and also the opposite.
+            2x Faster than using is_inside for both of them. '''
+        return (distance( self.center, another_circle.center ) < max( self.radius, another_circle.radius) )
+
+    def collide_circle(self,another_circle):
+        ''' Checks if this circle intersects with another_circle. '''
+        return (distance( self.center, another_circle.center ) <= (self.radius + another_circle.radius) )
+
+    def collide_point(self, (point_x, point_y)):
+        ''' Checks if (point_x, point_y) is inside this circle. '''
+        return (distance(self.center, (point_x,point_y) ) <= self.radius )
+
+    def collide_list_circle(self, list_circle):
+        ''' Checks if this circle intersects with any of the circles in circle_list. '''
+        for circle in list_circle:
+            if collide_circle(self,circle):
+                return True
+        else: #else of the for loop
+            return False
+
+    def collide_list_all_circle(self,list_circle):
+        ''' Checks if this circle intersects with all of the circles in circle_list. '''
+        for circle in list_circle:
+            if not collide_circle(self,circle):
+                return False
+        else: #else of the for loop
+            return True
+
+    def collide_rect(self,another_rect):
+        ''' Checks if this circle collides with another_rect. '''
+        return not ( (self.center_x+self.radius)<another_rect.left or (self.center_x-self.radius)>another_rect.right or (self.center_y+self.radius)<another_rect.top or (self.center_y-self.radius)>another_rect.bottom )
+
+    def collide_list_rect(self,list_rect):
+        ''' Returns True if collides with any of the rect in the list. '''
+        for temp_rect in list_rect:
+            if collide_rect(self,temp_rect):
+                return True
+        else:
+            return False
+
+    def collide_list_all_rect(self,list_rect):
+        ''' Returns True if collides with all the rect in the list. '''
+        for temp_rect in list_rect:
+            if not collide_rect(self,temp_rect):
+                return False
+            else:
+                return True
+
+    # union - do later. needs to be a circle *within* which the union of the bounding box of all the circles can be fit.
+##    def union(self,new_circle):
+##        ''' Returns a new circle which is the union of these two circles '''
+##        temp_var=self.__union((self.center,self.radius),(new_circle.center,new_circle.radius))
+##        return Circle(temp_var[0],temp_var[1])
+##
+##    def union_ip(self,new_circle):
+##        ''' Turns this circle into a circle which is a union of these two circles. '''
+##        self.center,self.radius=self.__union((self.center,self.radius),(new_circle.center,new_circle.radius))
+##
+##    def __unionall(self,seq_circle): # list_circle_params : [((x1,y1),radius_1), ((x2,y2),radius_2), ...]
+##        ''' returns ([x,y],radius) for the resultant union of all circles.
+##            sequence_circle must be a sequence of circles. '''
+##        temp_union= (self.center,self.radius)
+##        for temp_circle in seq_circle:
+##            temp_union = self.__union(temp_union,(temp_circle.center,temp_circle.radius))
+##        return temp_union
+##    def unionall(self,seq_circle): #seq_circle: sequence of circles
+##        temp_union=self.__unionall(seq_circle)
+##        return Circle(temp_union[0],temp_union[1])
+    # end of Circle class
 # functions outside all classes
 def get_event_list(event_types=None,further_check_variable_name=None,further_check_value=None,list_to_get=None):#list_to_get is attached to a constant list here
     ''' Get the required events from the event_list.
@@ -330,6 +452,10 @@ def get_event_list(event_types=None,further_check_variable_name=None,further_che
         return list_return
     return further_check_filter(func_filter()) # returns elements common in fun_Game.list_events and events which are accepted after further_check
 # end of get_event_list()
+
+def distance((x1,y1),(x2,y2)): # Maybe make a non-square rooted function for comparison (faster)
+    import math
+    return(math.sqrt((x2-x1)**2+(y2-y1)**2))
 
 #following constants are required for the next function
 UNION=1
@@ -394,3 +520,18 @@ def operation_on_lists(operation,list1,list2=None,variable_name=None):
     else:
          raise ValueError("Invalid operation name. Valid operations are UNION, INTERSECTION, DIFFERENCE.")
 # end of operation_on_lists()
+
+# Design tips I will use later
+# IMP: always derive classes from object. Else, in python 2.x, they become old-style class which sucks.
+# named tuples, arrays are better. use more of them. named tuples can be accessed.
+# refactor code into proper modules as-well-as use better named functions and variables
+# use enumerate() for getting the index and value of elements while looping through lists. This mistake done atleast 1 time.
+# use xrange instead of range. It produces one at a time. range is replaced by xrange in python 3.x
+# use reversed() for backward loops, sorted() for sorted order.
+# instead of zip(), use izip().
+# use key instead of comparator
+# use iter(iter_type,sentinel_value) instead of for loops
+# partial() makes a function with more number of argument to less number of argument
+# use for/else instead of exit based on flags
+# look at dict.iteritems() and dict.setdefaults
+# learn defaultdicts and collections module
