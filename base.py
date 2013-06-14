@@ -2,6 +2,7 @@
 from uniquelist import * # imports uniquelist
 import pygame
 from pygame.locals import * # imports the constants
+from math import *
 #Mouse constants
 B_LEFT_CLICK=1
 B_RIGHT_CLICK=3
@@ -296,6 +297,7 @@ class Circle(object):
         self.center=[x,y]
         self.radius=radius
         self.color=color
+
     @property
     def center_x(self):
         return self.center[0]
@@ -315,6 +317,9 @@ class Circle(object):
         width=self.radius*2
         height=self.radius*2
         return pygame.Rect(left, top, width, height)
+    # todo: remember about the colour. document - center is list unlike tuple in case of rect.
+    def __repr__(self):
+        return "{0.__class__}( center={0.center}, radius={0.radius}, color={0.color})".format(self)
 
     def copy(self):
         return Circle((self.center_x,self.center_y),self.radius,self.color)
@@ -332,19 +337,12 @@ class Circle(object):
     def inflate_ip(self,inflate_radius):
         self.radius+=inflate_radius
 
-    def __union(self,((x1,y1),radius_1),((x2,y2),radius_2)):
-        ''' self.__union((new_center_x,new_center_y),new_radius) -> ([x,y],radius) which are the resultant values. '''
-        temp_center_x = float(x1+x2)/2 # Does integer division, losses precision
-        temp_center_y = float(y1+y2)/2
-        temp_radius = float( radius_1 + radius_2 + distance( (x1,y1), (x2,y2) ) )/2
-        return ([temp_center_x,temp_center_y],temp_radius)
-
     def is_inside(self,another_circle):
-        ''' Checks if this circle is inside another_circle '''
+        ''' Checks if this circle is fully inside another_circle '''
         return  distance( self.center, another_circle.center )<self.radius
 
     def is_inside_mutual(self,another_circle):
-        ''' Checks if this circle is inside another_circle and also the opposite.
+        ''' Checks if this circle is fully inside another_circle and also the opposite.
             2x Faster than using is_inside for both of them. '''
         return (distance( self.center, another_circle.center ) < max( self.radius, another_circle.radius) )
 
@@ -392,27 +390,285 @@ class Circle(object):
             else:
                 return True
 
-    # union - do later. needs to be a circle *within* which the union of the bounding box of all the circles can be fit.
-##    def union(self,new_circle):
-##        ''' Returns a new circle which is the union of these two circles '''
-##        temp_var=self.__union((self.center,self.radius),(new_circle.center,new_circle.radius))
-##        return Circle(temp_var[0],temp_var[1])
-##
-##    def union_ip(self,new_circle):
-##        ''' Turns this circle into a circle which is a union of these two circles. '''
-##        self.center,self.radius=self.__union((self.center,self.radius),(new_circle.center,new_circle.radius))
-##
-##    def __unionall(self,seq_circle): # list_circle_params : [((x1,y1),radius_1), ((x2,y2),radius_2), ...]
-##        ''' returns ([x,y],radius) for the resultant union of all circles.
-##            sequence_circle must be a sequence of circles. '''
-##        temp_union= (self.center,self.radius)
-##        for temp_circle in seq_circle:
-##            temp_union = self.__union(temp_union,(temp_circle.center,temp_circle.radius))
-##        return temp_union
-##    def unionall(self,seq_circle): #seq_circle: sequence of circles
-##        temp_union=self.__unionall(seq_circle)
-##        return Circle(temp_union[0],temp_union[1])
+    @classmethod
+    def get_circumcircle_from_rect(cls,another_rect):# create a circle with same center and radius=sqrt(w^2+h^2)
+        import math
+        return cls(another_rect.center, math.sqrt(another_rect.width**2+another_rect.height**2)/2)
+
+    @classmethod
+    def get_incircle_from_rect(cls,another_rect): # radius of incircle is same as the min of width and height (as it's not a square)
+        import math
+        return cls(another_rect.center,min(another_rect.width,another_rect.height))
+
+    # union -needs to be a circle *within* which the union of the bounding box of all the circles can be fit.
+    # warning about all the union functions: The circles returned are not necessarily the most optimum union circle, but it will surely contain the others.
+    def _union(self,circle_1,circle_2):
+        ''' self.__union((new_center_x,new_center_y),new_radius) -> ([x,y],radius) which are the resultant values. '''
+        return self.circumcircle_from_rect(circle_1.bbox.union(circle_2.bbox))
+
+    def union(self,new_circle):
+        ''' Returns a new circle which is the union of these two circles '''
+        return self._union(self,new_circle)
+
+    def union_ip(self,new_circle):
+        ''' Turns this circle into a circle which is a union of these two circles. '''
+        temp_circle=self._union(self,new_circle)
+        self.center, self.radius = temp_circle.center, temp_circle.radius
+
+    def _unionall(self,circle_1,seq_circle): # list_circle_params : [((x1,y1),radius_1), ((x2,y2),radius_2), ...]
+        ''' returns ([x,y],radius) for the resultant union of all circles.
+            sequence_circle must be a sequence of circles. '''
+        return self.circumcircle_from_rect(circle_1.bbox.unionall([temp_circle.bbox for temp_circle in seq_circle]))
+
+    def unionall(self,seq_circle): #seq_circle: sequence of circles
+        return self._unionall(self,seq_circle)
+
+    def unionall_ip(self,seq_circle):
+        ''' Turns this circle into a circle which is a union of this circles with all circles in seq_circle'''
+        temp_circle=self._unionall(self,seq_circle)
+        self.center, self.radius = temp_circle.center, temp_circle.radius
+
+    # draw functions
+    def draw(self,surface,(x,y)=(None,None),color=None,width=1,use_antialiasing=False):
+        ''' Draws this Circle on surface. It must be of width and height greater than or equal to its bbox.
+            (x,y)->co-ordinates whether the center of the Circle should be drawn on the surface.
+            width argument doesnt work with antialiasing. width=0 makes it filled.
+            antialiasing may break in later versions as the backend pygame.gfxdraw is experimental.
+            color falls back first to Circle.color (if present) and then to blue color.'''
+        if (x,y)==(None,None):
+            (x,y)=self.center
+        if not color:
+            if self.color:
+                color=self.color
+            else:
+                color=pygame.Color("blue")
+
+        if not use_antialiasing:
+            pygame.draw.circle(surface, color,(x,y), self.radius, width)
+        else:
+            pygame.gfxdraw.aacircle(surface, x, y, self.radius, color)
+
+    def get_surface(self,surface=None,flags=0):
+        ''' Returns a new surface with dimensions of (Circle.bbox.width,Circle.bbox.width) and other properties as surface.
+            This Circle can be safely drawn on it.'''
+        if surface:
+            return pygame.Surface((self.bbox.width,self.bbox.height),flags,surface)
+        else:
+            return pygame.Surface((self.bbox.width,self.bbox.height),flags)
+
+    def get_surface_drawn(self,(x,y)=(None,None),color=None,width=1,use_antialiasing=False,surface=None,flags=0):
+        ''' Returns a surface which has the tiltedRect drwan on it. '''
+        temp_surf=self.get_surface(surface,flags)
+        self.draw(temp_surf,(x,y),color,width,use_antialiasing)
+        return temp_surf
+
     # end of Circle class
+    #start of tiltedRect class
+class tiltedRect(pygame.Rect):
+    # make a metaclass which wraps a lot of functions just like move is defined below.
+    # functions to be wrapped - move,inflate
+    # Think about them - clamp,clip,union,fit,contains,collide
+    # the metaclass can probably also change the __str__ of the class.
+    # About drawing - use pygame.transform.rotate to get a rotated surface to be drawed.
+    def __init__(self,(left,top),(width,height),angle,centered_coords=False,color=None):
+        ''' Angle in degrees.
+            centered_coords -> whether the (left,top) is actually intended to be (center_x,center_y) or not.
+            I.e. if centered_coords==True the (left,top) co-ordinates are used as (center_x,center_y) co-ordinates of the tiltedRect'''
+        self.angle=angle
+        self.color=color
+        if centered_coords==True:
+            left=left-width/2
+            top=top-height/2
+        super(tiltedRect,self).__init__((left,top),(width,height))
+    def __copy__(self):
+        return tiltedRect((self.left,self.top),(self.width,self.height),self.angle)
+    def __repr__(self):
+        return "{0.__class__.__name__}((top={0.top}, left={0.left}), (width={0.width}, height={0.height}), angle={0.angle}, color={0.color})".format(self)
+    @classmethod
+    def create_from_rect(cls,another_rect,angle):
+        return cls((another_rect.left,another_rect.top),(another_rect.width,another_rect.height),angle)
+    def get_rect(self):
+        return pygame.Rect((left,top),(width,height))
+    def move(self,x,y):
+        return self.create_from_rect(super(tiltedRect,self).move(x,y),self.angle)
+    def inflate(self,x,y):
+        return self.create_from_rect(super(tiltedRect,self).inflate(x,y),self.angle)
+    def normalize(self): # not sure what this one does - ask others
+        return self.create_from_rect(super(tiltedRect,self).normalize(),self.angle)
+    def rotate(self,some_angle):
+        temp_return=self.__copy__()
+        temp_return.angle+=some_angle
+        return temp_return
+    def rotate_ip(self,some_angle):
+        self.angle+=some_angle
+
+    def rotate_point_relative(self,x,y,theta=None):#generalise the parameters to accept x1,y1,x2,y2,rot_angle
+        ''' x,y -> Absolute co-ords of the point to be rotated wrt to the rectangles center. self.centerx,self.centery are internally substracted from them.
+            theta -> angle (in degrees) by which the point is to be rotated. Default value is self.angle.
+            Returns absolute positions of the points after rotation. '''
+        if theta==None:
+            theta=self.angle
+        return self.rotate_point(x,y,self.centerx,self.centery,theta)
+
+    @classmethod
+    def rotate_point(cls,x,y,origin_x,origin_y,theta): # to be allowed as rotate_point(class)
+        ''' x,y -> Absolute co-ords of the point to be rotated. origin_x,origin_y are internally substracted from them.
+            (origin_x,origin_y) -> Absolute co-ords of the origin wrt to which the point will be rotated
+            theta -> angle (in degrees) by which the point is to be rotated.
+            Returns absolute positions of the points after rotation. '''
+        import math
+        x_diff=x-origin_x
+        y_diff=y-origin_y
+        y_diff=-y_diff # -y_diff because of the inverted nature of y co-ordinate system in pygame
+        r=math.sqrt(x_diff**2+y_diff**2)
+        initial_angle=math.atan2(y_diff,x_diff)
+        final_angle=initial_angle+math.radians(theta)
+        rotated_x_diff=r*math.cos(final_angle)
+        rotated_y_diff=r*math.sin(final_angle)
+        rotated_y_diff = -rotated_y_diff # - used for same reason as above
+        rotated_x = rotated_x_diff + origin_x
+        rotated_y = rotated_y_diff + origin_y
+        return (rotated_x,rotated_y)
+
+    def rotate_point_polar(self,r,initial_angle,theta=None):
+        ''' theta and initial_angle in radians.
+            initial_angle ->angle r makes with horizontal.
+            theta -> angle to be rotated by. '''
+        if theta==None:
+            theta=self.angle
+        final_angle=initial_angle+theta
+        rotated_x=r*math.cos(final_angle)
+        rotated_y=r*math.sin(final_angle)
+        return (rotated_x,rotated_y)
+
+    @property
+    def bottomleft_rotated(self):
+        temp=self.bottomleft
+        return self.rotate_point_relative(temp[0],temp[1])
+    @property
+    def topleft_rotated(self):
+        temp=self.topleft
+        return self.rotate_point_relative(temp[0],temp[1])
+    @property
+    def bottomright_rotated(self):
+        temp=self.bottomright
+        return self.rotate_point_relative(temp[0],temp[1])
+    @property
+    def topright_rotated(self):
+        temp=self.topright
+        return self.rotate_point_relative(temp[0],temp[1])
+    @property
+    def midleft_rotated(self):
+        temp=self.midleft
+        return self.rotate_point_relative(temp[0],temp[1])
+    @property
+    def midright_rotated(self):
+        temp=self.midright
+        return self.rotate_point_relative(temp[0],temp[1])
+    @property
+    def midtop_rotated(self):
+        temp=self.midtop
+        return self.rotate_point_relative(temp[0],temp[1])
+    @property
+    def midbottom_rotated(self):
+        temp=self.midbottom
+        return self.rotate_point_relative(temp[0],temp[1])
+
+    # related to bounding box
+    @property
+    def bbox(self):
+        list_x=[self.topleft_rotated[0],self.topright_rotated[0],self.bottomleft_rotated[0],self.bottomright_rotated[0]]
+        list_y=[self.topleft_rotated[1],self.topright_rotated[1],self.bottomleft_rotated[1],self.bottomright_rotated[1]]
+        min_x=floor(min(list_x))
+        max_x=ceil(max(list_x))
+        min_y=floor(min(list_y))
+        max_y=floor(max(list_y))
+        return pygame.Rect((min_x,min_y),(max_x-min_x,max_y-min_y))
+    # corners
+    @property
+    def corners(self):
+        ''' List of actual (rotated) corners. '''
+        return [self.topleft_rotated,self.topright_rotated,self.bottomright_rotated,self.bottomleft_rotated]
+    @property
+    def corners_relative(self):
+        return [(temp[0]-self.centerx,temp[1]-self.centery) for temp in self.corners]
+
+    # circles related to the rect
+    def get_circumcircle(self):
+        Circle.get_circumcircle_from_rect(self.bbox)
+    def get_incircle(self):
+        Circle.get_incircle_from_rect(self.bbox)
+
+    # collision events
+    def collide_point(self,*args):
+        ''' collidepoint(x,y) ->
+            collidepoint((x,y)) -> '''
+        temp_len=len(args)
+        temp_x=None
+        temp_y=None
+        if temp_len==2:
+            temp_x=args[0]
+            temp_y=args[1]
+        elif temp_len==1:
+            if len(args[0])==2:
+                temp_x,temp_y=args[0]
+            else:
+                raise TypeError("Arguments are of incorrect type")
+        else:
+            raise TypeError("Arguments are of incorrect type")
+        if temp_x==None or temp_y==None:
+            raise TypeError("argument must contain two numbers")
+        return pygame.Rect((self.left,self.top),(self.width,self.height)).collidepoint(self.rotate_point_relative(temp_x,temp_y))
+
+    def collide_rect(self,rect):
+        ''' Tests if it collides with rect, which should be instance of rect class. '''
+        # First test:whether bbox collides with rect. If not, no collision.
+        if not self.bbox.colliderect(rect):
+            return False
+        else:
+        # Todo: Else sure test: Need to do line class first. Test if any line of titedRect collides with any line of (instead, the whole) rect.
+            pass
+
+    # draw functions
+    def draw(self,surface,(x,y)=(None,None),color=None,width=1,use_antialiasing=False,blend=True):
+        ''' Draws this tiltedRect on surf_to_draw_on. It must be of width and height greater or equal to its bbox.
+            (x,y)->co-ordinates whether the lefttop point of its bbox should be drawn on the surface.
+            width argument doesnt work with antialiasing. width=0 makes it filled.
+            blend argument works only with antialiasing. The boolean blend argument set to true will blend the shades with existing shades instead of overwriting them.
+            color falls back first to tiltedRect.color (if present) and then to blue color.'''
+        if (x,y)==(None,None):
+            (x,y)=(0,0)
+        if not color:
+            if self.color:
+                color=self.color
+            else:
+                color=pygame.Color("blue")
+        iter_corners=[(temp[0]+x,temp[1]+y) for temp in self.corners_relative]
+        if not use_antialiasing:
+            pygame.draw.polygon(surface, color, iter_corners, width)
+        else:
+            pygame.draw.aalines(surface, color, True, iter_corners, blend)
+    def get_surface(self,surface=None,flags=0):
+        ''' Returns a new surface with dimensions of (tiltedRect.bbox.width,tiltedRect.bbox.width) and other properties as surface.
+            This tiltedRect can be safely drawn on it.'''
+        if surface:
+            return pygame.Surface((self.bbox.width,self.bbox.height),flags,surface)
+        else:
+            return pygame.Surface((self.bbox.width,self.bbox.height),flags)
+    def get_surface_drawn(self,(x,y)=(None,None),color=None,width=1,use_antialiasing=False,blend=True,surface=None,flags=0):
+        ''' Returns a surface which has the tiltedRect drwan on it. '''
+        temp_surf=self.get_surface(surface,flags)
+        self.draw(temp_surf,(x,y),color,width,use_antialiasing,blend)
+        return temp_surf
+
+    def collide_tiltedRect(self,another_tiltedRect):
+        '''Checks whether this tiltedRect collides with another_titltedrect, which must be a instance of titledRect. '''
+        # Rotates both tiltedRect by -another_tiltedRect.angle. So, another_tiltedRect becomes a Rect called temp_Rect.
+        # Then check if the rotated version of this tiltedRect (temp_tiltedRect) collides with the obtained Rect.
+        temp_tiltedRect=self.rotate(-another_tiltedRect.angle)
+        temp_Rect=another_tiltedRect.get_rect()
+        return temp_tiltedRect.colliderect(temp_Rect)
+
 # functions outside all classes
 def get_event_list(event_types=None,further_check_variable_name=None,further_check_value=None,list_to_get=None):#list_to_get is attached to a constant list here
     ''' Get the required events from the event_list.
@@ -520,9 +776,13 @@ def operation_on_lists(operation,list1,list2=None,variable_name=None):
     else:
          raise ValueError("Invalid operation name. Valid operations are UNION, INTERSECTION, DIFFERENCE.")
 # end of operation_on_lists()
-
+#Todo: see below
+# 1. Allow rect-like and circle-like constructs wherever rect and circle are expected.
+# 2. Do all sort of type-checking.
 # Design tips I will use later
 # IMP: always derive classes from object. Else, in python 2.x, they become old-style class which sucks.
+# use tuples instead of lists wherver possible because they are usually faster to create
+# learn about generators
 # named tuples, arrays are better. use more of them. named tuples can be accessed.
 # refactor code into proper modules as-well-as use better named functions and variables
 # use enumerate() for getting the index and value of elements while looping through lists. This mistake done atleast 1 time.

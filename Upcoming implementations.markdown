@@ -2,7 +2,7 @@ Upcoming in pyFun
 -----------------
 ***
 
-1. Circle class ( __Doing__ ) and Angled rect class (subclassed from rect)
+1. Circle class (__Doing__) and Tilted rect and Line class (subclassed from rect)
 2. Image module (similar to GM sprites)
     + Make a custom image object which should support
         + Sprites and shapes, with good query hooks
@@ -24,6 +24,7 @@ Upcoming in pyFun
 4. Timer (alarm) module
     * Support arbitrary number of timers and also tracking them with id.
 5. Add other keyboard and mouse module extras like GM
+6. Room support
 6. Add events mentioned in GM "Other" event dropdown.
 7. Surfaces
 8. Particles
