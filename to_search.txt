@@ -1,0 +1,33 @@
+how @classmethod and @property works
+how to call in python shell for debugging (import pdb;pdb.set_trace())
+what are best-practises for writing classes that makes for better and flexible sub-classes
+how __get__  works
+
+Learnt:
+1. Can define class functions and class properties (getter/setter) using metaclass.
+
+IMP (Have to try):
+
+import inspect
+
+class meta(type):
+    def __new__(cls, name, base, clsdict):
+        temp_cls = type.__new__(cls, name, base, clsdict)
+        methods=inspect.getmembers(temp_cls,inspect.ismethod)
+        for method in methods:
+            print inspect.getargspec(method[1])
+
+class A(Object):
+    __metaclass__=meta
+    @doit(what_to_do)
+    def abc():
+        pass
+
+def doit(what_to_do, main_func):
+    def abc(what_to_do=what_to_do,main_func=main_func):
+        pass
+    return "pass" function containing both params (and a special param to indicate doit-processed func)\
+     with default values set (default values are themself func).
+
+What meta does ->
+Identify funcs processed with doit and return main_func after invoking what_to_do

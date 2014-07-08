@@ -1,0 +1,1662 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"get",
+				"get_switch_func"
+			],
+			[
+				"sw",
+				"switch_func"
+			],
+			[
+				"from",
+				"from_	statement"
+			],
+			[
+				"ca",
+				"call_func	param"
+			],
+			[
+				"_c",
+				"_current_dict	statement"
+			],
+			[
+				"st",
+				"str	class"
+			],
+			[
+				"fr",
+				"from_	param"
+			],
+			[
+				"sel",
+				"self"
+			],
+			[
+				"sta",
+				"state_name	forflow"
+			],
+			[
+				"li",
+				"list	class"
+			],
+			[
+				"for",
+				"format"
+			],
+			[
+				"ha",
+				"has_state"
+			],
+			[
+				"fro",
+				"from_	statement"
+			],
+			[
+				"uni",
+				"uniquelist	import"
+			],
+			[
+				"un",
+				"uniquelist	import"
+			],
+			[
+				"state",
+				"state_name"
+			],
+			[
+				"_d",
+				"_current_dict	statement"
+			],
+			[
+				"att",
+				"attr_name"
+			],
+			[
+				"_",
+				"_current_dict"
+			],
+			[
+				"tm",
+				"tmp_type	statement"
+			],
+			[
+				"ga",
+				"game_shape_class"
+			],
+			[
+				"obj",
+				"obj_ext	class"
+			],
+			[
+				"sp",
+				"sprite_panel"
+			],
+			[
+				"pa",
+				"params	param"
+			],
+			[
+				"tmp",
+				"tmp_dict"
+			],
+			[
+				"data",
+				"data_loaded_inst	statement"
+			],
+			[
+				"da",
+				"list_inst_data"
+			],
+			[
+				"list_cl",
+				"list_class_data	statement"
+			],
+			[
+				"lis",
+				"list_class_data	statement"
+			],
+			[
+				"para",
+				"params"
+			],
+			[
+				"ex",
+				"export_game_cls	function"
+			],
+			[
+				"rtr",
+				"return	keyword"
+			],
+			[
+				"val",
+				"val_return	statement"
+			],
+			[
+				"dic",
+				"dict_loaded_cls"
+			],
+			[
+				"ret",
+				"return	keyword"
+			],
+			[
+				"game",
+				"game_cls	param"
+			],
+			[
+				"gam",
+				"game_class"
+			],
+			[
+				"cl",
+				"class_data	statement"
+			],
+			[
+				"pan",
+				"panel_cls"
+			],
+			[
+				"pro",
+				"prompt-read"
+			],
+			[
+				"_star",
+				"_start_left	statement"
+			],
+			[
+				"_st",
+				"_start_w	statement"
+			],
+			[
+				"co",
+				"clientsock.connect_ex"
+			],
+			[
+				"So",
+				"socket	class"
+			],
+			[
+				"load_",
+				"load_saved_json	function"
+			],
+			[
+				"crea",
+				"create_box_sizer"
+			],
+			[
+				"cre",
+				"create_panel_ctrl"
+			],
+			[
+				"def",
+				"default_center	param"
+			],
+			[
+				"cr",
+				"create_shape_panel	function"
+			],
+			[
+				"gen",
+				"generate_loaded_shapes"
+			],
+			[
+				"up",
+				"update"
+			],
+			[
+				"pos",
+				"pos_wrt_parent	statement"
+			],
+			[
+				"Scree",
+				"ScreenToClient	function"
+			],
+			[
+				"Client",
+				"ClientToScreen	function"
+			],
+			[
+				"act",
+				"action_mouse_left_up"
+			],
+			[
+				"EVT_LEFT_",
+				"EVT_LEFT_UP	statement"
+			],
+			[
+				"JOIN_",
+				"JOIN_ROUND	statement"
+			],
+			[
+				"Join_",
+				"JOIN_MITER	statement"
+			],
+			[
+				"Set",
+				"SetJoin	function"
+			],
+			[
+				"PENSTYL",
+				"PENSTYLE_LONG_DASH	statement"
+			],
+			[
+				"NullP",
+				"NullPen	statement"
+			],
+			[
+				"Null",
+				"NullBrush	statement"
+			],
+			[
+				"foc",
+				"focus_text	statement"
+			],
+			[
+				"fil",
+				"filename	param"
+			],
+			[
+				"fa",
+				"fake_class	class"
+			],
+			[
+				"cla",
+				"class	New Class"
+			],
+			[
+				"re",
+				"read	function"
+			],
+			[
+				"app",
+				"append_filepath	function"
+			],
+			[
+				"lo",
+				"load_module	function"
+			],
+			[
+				"imp",
+				"import_module	function"
+			],
+			[
+				"str",
+				"str_	forflow"
+			],
+			[
+				"di",
+				"dict_loaded_cls	statement"
+			],
+			[
+				"po",
+				"pop	function"
+			],
+			[
+				"pop",
+				"pop	function"
+			],
+			[
+				"cls",
+				"cls_obj	forflow"
+			],
+			[
+				"roo",
+				"room_sprite_panel	import"
+			],
+			[
+				"py",
+				"pygame_class"
+			],
+			[
+				"loa",
+				"load_map	import"
+			],
+			[
+				"ins",
+				"inspect	import"
+			],
+			[
+				"im",
+				"import_module	function"
+			],
+			[
+				"wri",
+				"write	function"
+			],
+			[
+				"fi",
+				"file	class"
+			],
+			[
+				"js",
+				"jsoned_data	statement"
+			],
+			[
+				"panel_",
+				"panel_ctrl"
+			],
+			[
+				"el",
+				"else	keyword"
+			],
+			[
+				"i",
+				"isinstance	function"
+			],
+			[
+				"jso",
+				"jsoned_data	statement"
+			],
+			[
+				"Cl",
+				"class"
+			],
+			[
+				"bin",
+				"bind_events_default"
+			],
+			[
+				"bi",
+				"bind_events_default"
+			],
+			[
+				"Dr",
+				"DrawCircle	function"
+			],
+			[
+				"ac",
+				"action_move	function"
+			],
+			[
+				"EVT_C",
+				"EVT_CHAR	statement"
+			],
+			[
+				"wxk_numpad_s",
+				"WXK_NUMPAD_SUBTRACT	statement"
+			],
+			[
+				"action_",
+				"action_inflate	function"
+			],
+			[
+				"Get",
+				"GetUniChar"
+			],
+			[
+				"G",
+				"GetKeyCode"
+			],
+			[
+				"EVT_I",
+				"EVT_IDLE	statement"
+			],
+			[
+				"updat",
+				"update_internal"
+			],
+			[
+				"pr",
+				"print	function"
+			],
+			[
+				"new",
+				"new_h	statement"
+			],
+			[
+				"SetSi",
+				"SetSizeWH	function"
+			],
+			[
+				"GEtsi",
+				"GetSizeTuple	function"
+			],
+			[
+				"GETPo",
+				"GetPositionTuple	function"
+			],
+			[
+				"sh",
+				"Show	function"
+			],
+			[
+				"Add",
+				"AddChild	function"
+			],
+			[
+				"Rec",
+				"RectPanel	class"
+			],
+			[
+				"EVT_FOCUS",
+				"EVT_SET_FOCUS	statement"
+			],
+			[
+				"u",
+				"updater_list	class"
+			],
+			[
+				"su",
+				"super	class"
+			],
+			[
+				"upda",
+				"updater_func"
+			],
+			[
+				"me",
+				"method_	statement"
+			],
+			[
+				"Se",
+				"SetStringItem"
+			],
+			[
+				"list",
+				"list_shape	param"
+			],
+			[
+				"it",
+				"items"
+			],
+			[
+				"lsi",
+				"list_shape	param"
+			],
+			[
+				"setsi",
+				"SetSizer	function"
+			],
+			[
+				"dir",
+				"direction	function"
+			],
+			[
+				"ata",
+				"atan2_inv	function"
+			],
+			[
+				"poi",
+				"point_2"
+			],
+			[
+				"vel",
+				"vel_dir	param"
+			],
+			[
+				"ve",
+				"vel_add	function"
+			],
+			[
+				"mat",
+				"math_utils	import"
+			],
+			[
+				"diff",
+				"diff_y	statement"
+			],
+			[
+				"No",
+				"None	statement"
+			],
+			[
+				"cle",
+				"clear_event_local	function"
+			],
+			[
+				"list_e",
+				"list_event_local"
+			],
+			[
+				"dis",
+				"dispatch_events_self"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "base.py",
+			"settings":
+			{
+				"buffer_size": 16278,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "event.py",
+			"settings":
+			{
+				"buffer_size": 16437,
+				"line_ending": "Unix",
+				"read_only": true
+			}
+		},
+		{
+			"file": "/E/Babu bckup/Sublime Text Build 3059/Data/Packages/HTML-CSS-JS Prettify/HTMLPrettify.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 293,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "todo.txt",
+			"settings":
+			{
+				"buffer_size": 4096,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "load_map.py",
+			"settings":
+			{
+				"buffer_size": 2968,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "map.json",
+			"settings":
+			{
+				"buffer_size": 3435,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "room_editor.py",
+			"settings":
+			{
+				"buffer_size": 7369,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "room_editor_old.py",
+			"settings":
+			{
+				"buffer_size": 6439,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "state_machine.py",
+			"settings":
+			{
+				"buffer_size": 2408,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "room_sprite_panel.py",
+			"settings":
+			{
+				"buffer_size": 9301,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "utils.py",
+			"settings":
+			{
+				"buffer_size": 9666,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "math_utils.py",
+			"settings":
+			{
+				"buffer_size": 4209,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test_explicit_blit.py",
+			"settings":
+			{
+				"buffer_size": 1809,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sprite_types.py",
+			"settings":
+			{
+				"buffer_size": 494,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Circle.py",
+			"settings":
+			{
+				"buffer_size": 18534,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Rect.py",
+			"settings":
+			{
+				"buffer_size": 19902,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Img.py",
+			"settings":
+			{
+				"buffer_size": 15020,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"selected_items":
+		[
+			[
+				"clea",
+				"Package Control: Install Package"
+			],
+			[
+				"cl",
+				"SublimeREPL: Clisp"
+			],
+			[
+				"res",
+				"SublimeREPL: Restart REPL"
+			],
+			[
+				"cli",
+				"SublimeREPL: Clisp"
+			],
+			[
+				"lisp",
+				"SublimeREPL: Clisp"
+			],
+			[
+				"lis",
+				"Set Syntax: Lisp"
+			],
+			[
+				"li",
+				"Package Control: List Packages"
+			],
+			[
+				"dis",
+				"Package Control: Disable Package"
+			],
+			[
+				"text",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"i",
+				"Package Control: Install Package"
+			],
+			[
+				"ip",
+				"SublimeREPL: Python - IPython"
+			],
+			[
+				"run",
+				"SublimeREPL: Python - RUN current file"
+			],
+			[
+				"sw	",
+				"Convert Case: Swap Case"
+			],
+			[
+				"swap",
+				"Convert Case: Swap Case"
+			],
+			[
+				"caps",
+				"Convert Case: Swap Case"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				"pdb",
+				"SublimeREPL: Python - PDB current file"
+			],
+			[
+				"ru	",
+				"SublimeREPL: Python - RUN current file"
+			],
+			[
+				"pyto",
+				"SublimeREPL: Python - PDB current file"
+			],
+			[
+				"py",
+				"SublimeREPL: Python"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"ana",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"IP",
+				"SublimeREPL: Python - IPython"
+			],
+			[
+				"restart",
+				"SublimeREPL: Restart REPL"
+			],
+			[
+				"rest",
+				"SublimeREPL: Restart REPL"
+			],
+			[
+				"ipy",
+				"SublimeREPL: Python - IPython"
+			],
+			[
+				"an",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"mac",
+				"Anaconda: McCabe complexity check"
+			],
+			[
+				"anaconda",
+				"Anaconda: McCabe complexity check"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"ht",
+				"Set Syntax: HTML"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 415.0
+	},
+	"console":
+	{
+		"height": 132.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/E/Babu bckup/github_files/pyFun/state_machine.py",
+		"/E/Babu bckup/Sublime Text Build 3059/Data/Packages/anaconda/Anaconda.sublime-settings",
+		"/E/Babu bckup/Sublime Text Build 3059/Data/Packages/User/Anaconda.sublime-settings",
+		"/E/Program Files/wxPython3.0 Docs and Demos/wxPython/samples/wxPIA_book/Chapter-06/example1_mod.py",
+		"/D/Babu bckup/github_files/pyFun/map_2.json",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/SublimeREPL/SublimeREPL.sublime-settings",
+		"/E/Program Files/newlisp/newlisp-edit.lsp",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/HTML-CSS-JS Prettify/HTMLPrettify.sublime-settings",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
+		"/C/Users/Machine/Desktop/a.html",
+		"/C/Users/Machine/Desktop/compython.py",
+		"/D/Babu bckup/github_files/pyFun/room_editor_old.py",
+		"/D/Babu bckup/github_files/map.json",
+		"/E/Program Files/wxPython3.0 Docs and Demos/wxPython/samples/wxPIA_book/Chapter-06/example1.py",
+		"/D/Babu bckup/github_files/pyFun/Rotated_Rect.py",
+		"/D/Babu bckup/github_files/pyFun/base_old.py",
+		"/D/Babu bckup/github_files/pyFun/math_utils.py",
+		"/D/Babu bckup/github_files/pyFun/Upcoming implementations.markdown",
+		"/D/Babu bckup/github_files/pyFun/awesome_try.py",
+		"/D/Babu bckup/github_files/pyFun/README.html",
+		"/D/Babu bckup/github_files/pyFun/event.py",
+		"/D/Babu bckup/github_files/pyFun/base.pyc",
+		"/D/Babu bckup/github_files/pyFun/utils_old.py",
+		"/D/Babu bckup/github_files/pyFun/Event.py",
+		"/D/Babu bckup/github_files/pyFun/Rect.py",
+		"/D/Babu bckup/github_files/pyFun/sprite_types.py",
+		"/D/Babu bckup/github_files/pyFun/utils.py",
+		"/C/Users/Machine/Downloads/Compressed/Brython2.1.2-20140607-093129/Brython2.1.2-20140607-093129/brython.js",
+		"/D/Babu bckup/github_files/pyFun/uniquelist.py",
+		"/D/Babu bckup/github_files/pyFun/base.py",
+		"/D/Babu bckup/github_files/blog/trial_canvas.js",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/D/Babu bckup/github_files/pyFun/test_event_action.py",
+		"/D/Babu bckup/github_files/pyFun/test_event_action",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/User/Preferences.sublime-settings",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/TernJS/TernJS.sublime-settings",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/User/TernJS.sublime-settings",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/Default/Preferences.sublime-settings",
+		"/D/Babu bckup/github_files/pyFun/utils_exp.py",
+		"/D/Babu bckup/github_files/pyFun/base_old_0.py",
+		"/D/Babu bckup/github_files/pyFun/awesome_better.py",
+		"/D/Babu bckup/github_files/pyFun/0.py",
+		"/D/Babu bckup/github_files/pyFun/test_register_event",
+		"/D/Babu bckup/github_files/pyFun/test_color_fill.py",
+		"/D/Babu bckup/github_files/pyFun/basic.py",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/anaconda/Anaconda.sublime-settings",
+		"/E/Python27/Lib/site-packages/pygame/constants.pyd",
+		"/E/Python27/Lib/site-packages/pygame/locals.py",
+		"/D/Babu bckup/github_files/pyFun/ip.py",
+		"/D/Babu bckup/github_files/pyFun/test_color_fill_all_check.py",
+		"/D/Babu bckup/github_files/pyFun/test_basic.py",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/Machine/Downloads/nunjucks.js",
+		"/C/Users/Machine/Downloads/ractive.js",
+		"/C/Users/Machine/Downloads/nunjucks-slim.js",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/User/Side Bar.sublime-settings",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/User/Default (Windows).sublime-keymap",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/SideBarEnhancements/Default (Windows).sublime-keymap",
+		"/D/Babu bckup/Sublime Text Build 3059/Data/Packages/Emmet/Emmet.sublime-settings",
+		"/E/Babu/github_files/pyFun/how i want/pong.py",
+		"/E/Babu/github_files/pyFun/uniquelist.py",
+		"/E/Babu/github_files/pyFun/base.py",
+		"/E/Babu/Sublime Text Build 3059/Data/Packages/User/Anaconda.sublime-settings",
+		"/E/Babu/Sublime Text Build 3059/Data/Packages/anaconda/Anaconda.sublime-settings",
+		"/C/Documents and Settings/Machine/Desktop/a.py",
+		"/C/Documents and Settings/Machine/Desktop/ball.py",
+		"/C/Documents and Settings/Machine/My Documents/Downloads/Compressed/pygame-1.9.1release/lib/camera.py",
+		"/C/Documents and Settings/Machine/My Documents/Downloads/Compressed/pygame-1.9.1release/lib/sndarray.py",
+		"/E/Babu/Sublime Text Build 3059/Data/Packages/User/Preferences.sublime-settings",
+		"/E/Babu/Sublime Text Build 3059/Data/Packages/Default/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 98.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"str_",
+			"self.full_file_path",
+			"self",
+			"tmp_path",
+			"create_shape_panel_from_str",
+			"config",
+			"default_center",
+			"generate_loaded_shapes",
+			"each_inst",
+			"config",
+			"foo",
+			"create",
+			"for_all_panel_class",
+			"list_panel_inst",
+			"list_panel_instance",
+			"list_shape",
+			"dict_sprite_panel",
+			"list_shape",
+			"left",
+			"# \"panel\": self.__class__.__name__,",
+			"pygame_class",
+			"_start_",
+			"_start",
+			"w",
+			"create_internal",
+			"action_mouse_left_down",
+			"mouse_focus",
+			"evt",
+			"Pen",
+			"t_circle",
+			"CircleP",
+			"show_debug",
+			"bind_event",
+			"\"center\":",
+			"center",
+			"module",
+			"or_module",
+			"load_module",
+			"\"panel\"",
+			"export",
+			"create_shape_panel",
+			"get_p",
+			"new_rect",
+			"self.list_loaded_cls[0].sprite_defaults",
+			"list_l",
+			"list_loaded_",
+			"0",
+			"list_shape",
+			"filter_class_with_sprite",
+			"sprite",
+			"tmp_sprite_cls",
+			"sprite_de",
+			"spr",
+			"get_prop",
+			"register_sprite_panel",
+			"dict_sprite_panel",
+			"dialog",
+			"list_loaded_map",
+			"dialog",
+			"get_p",
+			"{",
+			"expo",
+			"'",
+			"{",
+			"expor",
+			"get_",
+			"{",
+			".panel_canvas",
+			"# style=wx.TRANSPARENT_WINDOW",
+			"parent",
+			"height",
+			"_y",
+			"_x",
+			"x",
+			"w",
+			"self.y",
+			"self.x",
+			"self.w",
+			"height",
+			"width",
+			"keyText",
+			"Text",
+			"_SUBTRACT",
+			"ADD",
+			"wx.WXK_ADD",
+			"==",
+			"keyText",
+			"update_i",
+			"str(",
+			"h",
+			"_w",
+			"w",
+			"h",
+			"w",
+			"self.",
+			"old",
+			"w",
+			"1.05",
+			"Move(",
+			"extend",
+			"update_list_ctrl",
+			"updater_func",
+			"def",
+			" ",
+			"arg",
+			"x",
+			"shape_list",
+			"shape_list_ctrl",
+			"()\n",
+			"size=",
+			"size",
+			"/",
+			"panel_",
+			"3",
+			"2",
+			"dc =",
+			"self.buffer",
+			"except",
+			"Circle",
+			"register_event",
+			"register_e",
+			"register",
+			"return_vel[0]",
+			"self.",
+			"import",
+			"atan2",
+			"self.",
+			"x"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "base.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16278,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9049,
+								9049
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3180.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "event.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16437,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5456,
+								5456
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2155.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/E/Babu bckup/Sublime Text Build 3059/Data/Packages/HTML-CSS-JS Prettify/HTMLPrettify.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 293,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "todo.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4096,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								394,
+								394
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "load_map.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2968,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2321,
+								2321
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 825.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "map.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3435,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "room_editor.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7369,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								556,
+								556
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 161.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "room_editor_old.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6439,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								624,
+								624
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 177.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "state_machine.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2408,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								653,
+								653
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 648.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "room_sprite_panel.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9301,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5525,
+								5525
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 2031.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "utils.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9666,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9666,
+								9666
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3194.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "math_utils.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4209,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1646,
+								1646
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 95.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "test_explicit_blit.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1809,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1612,
+								1612
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 447.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "sprite_types.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 494,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								358,
+								358
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "Circle.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18534,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								209,
+								209
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "Rect.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19902,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								204,
+								204
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2257.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "Img.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15020,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								138,
+								138
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 106.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "pyFun.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 261.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

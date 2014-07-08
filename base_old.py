@@ -6,12 +6,13 @@ from uniquelist import uniquelist  # imports uniquelist
 import pygame
 from pygame.locals import *  # imports the constants
 import math
-from utils import register_class, meta_accessor_class, register_action
+from utils import register_class, meta_accessor_class, register_event, selfie, KW_EVENTS_IB, sort_events, append_user_events, fuzzy_match_event_name, KW_EVENTS_ALL, rect_to_pygame_rect
 # import utils
+from functools import partial
+from sprite_types import Circle, Rect
 import logging
 from copy import deepcopy
-from math_utils import atan2_inv, distance, vel_add, direction
-import event
+from math_utils import atan2_inv
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -33,6 +34,13 @@ RIGHT = 4
 
 class fun_Game(object):
     list_class = uniquelist()
+    list_event = []  # event_list of this step
+    list_event_old = []  # event_list of the previous step
+    # A sequence of boolean representing the state of every key
+    list_state_all_buttons = []
+    # A sequence of boolean representing the state of every key of previous
+    # step
+    list_state_all_buttons_old = []
 
     def __init__(self, width, height, fps=30):
         pygame.init()
@@ -66,7 +74,32 @@ class fun_Game(object):
     def register_class(cls, cls_to_register):
         cls.list_class.append(cls_to_register)
 
-    dispatch_events_class = classmethod(event.dispatch_events_class)
+    @classmethod
+    def update_all_class(cls):
+        for tmp_cls in cls.list_class:
+            tmp_cls.update_instances(cls.list_event)
+
+    @classmethod
+    def process_event_list(cls, list_event_):
+        append_user_events(list_event_)
+        cls.list_event.sort(sort_events)
+
+    @classmethod
+    def _cache_event_list(cls):
+        ''' Cache event_list in every step.
+            All events in fun_Game.list_event have a "type" property which are the usual constants. '''
+        cls.list_event_old = cls.list_event  # move current list to old list
+        cls.list_state_all_buttons_old = cls.list_state_all_buttons
+
+        cls.list_event = pygame.event.get()
+        cls.process_event_list(cls.list_event)
+        # Returns a sequence of boolean representing the state of every key.
+        # Use key constant values for indexing.
+        cls.list_state_all_buttons = pygame.key.get_pressed()
+        # print cls.list_event  # debug message
+    # control access to list_event
+    # with getter, do something crazy for filtering
+    # or a filtering function
 
     @classmethod
     def for_all_instance(cls, func_to_run, flatten):
@@ -150,8 +183,8 @@ class fun_Game(object):
                 tmp_intersect_rect = tmp_clear_rect.clip(
                     tmp_old_sprite["bbox"])
                 if tmp_intersect_rect.w > 0 and tmp_intersect_rect.h > 0:
-                    # make blit funcs capable of taking a clip rect, will be
-                    # appplied before blitting
+                    # make blit funcs capable of taking a clip rect, will be appplied before blitting
+##                        print("explicit blit")
                     copy_old_sprite = deepcopy(tmp_old_sprite)
                     copy_old_sprite["clip_rect"] = tmp_intersect_rect
                     list_dirty_overlay_sprite.append(copy_old_sprite)
@@ -166,13 +199,13 @@ class fun_Game(object):
         # step 3: for every clear_rect not marked for removal, do the
         # clear_rects.
 # print "Clear_rects= ",len(list_clear_rect)-len(list_cancelled_clear_rect)
-        # i = 0
+        i = 0
         for tmp_clear_rect in list_clear_rect:
             # convert to pygame rect
             if not (tmp_clear_rect in list_cancelled_clear_rect):
                 self.screen.fill(pygame.Color(0, 0, 0, 1), tmp_clear_rect)
-                # i += 1
-        # print "i=", i
+                i += 1
+        print "i=", i
 
         # step 4: do blit for all dirty_sprite and dirty_overlay
         for tmp_dirty_sprite in list_dirty_sprite:
@@ -189,9 +222,7 @@ class fun_Game(object):
         # step 5: update display
         list_display_update = [tmp_dirty_sprite["bbox"]
                                for tmp_dirty_sprite in list_dirty_sprite] + list_clear_rect
-
         pygame.display.update(list_display_update)
-
 # if not (list_dirty_sprite[0]["sprite"].bbox in list_display_update):
 # print("problem")
 
@@ -215,8 +246,8 @@ class fun_Game(object):
             # although override-able
             frame_no += 1
             # print frame_no
-            event.collect_events()
-            self.dispatch_events_class()
+            self._cache_event_list()
+            self.update_all_class()
             self.blit_all_class()
             self.test_update()
             # VERY IMPORTANT: Do a spare first step so that every variable / list gets initialized well.
@@ -235,6 +266,9 @@ class fun_Game(object):
     # class fun_Game ends here
 # print(fun_Game)
 
+# global register_event cached,as it will also be used as classmethod
+# should use register_event=_register_event at end of all class defn
+
 meta_fun_Class = meta_accessor_class
 
 
@@ -251,11 +285,20 @@ class fun_Class(object):
     # dict_action_func -> dict of action funcs, key=event_numb like KEYDOWN
     # dict_action_func = {}
 
+    sprite_defaults = {
+        "type": Rect,
+        "params": {
+            "size": (40, 40),
+            "color": None
+        }
+    }
+
     def __init__(self, x=None, y=None):
         # use sprite as a general term, img->one kind of sprite, rect, circle
         self.x_start = x
         self.y_start = y
-        self.center = [x, y]
+        self.x = x
+        self.y = y
         self.x_prev = x
         self.y_prev = y
         self.vel_x, self.vel_y, self.accln_x, self.accln_y = 0, 0, 0, 0
@@ -275,43 +318,15 @@ class fun_Class(object):
             self.sprite = None
         self.list_instance.append(self)
         # think about self.action_create()
-        self.push_event_local(event.Event("Instance_create"))
-
-    @property
-    def center(self):
-        return self._center
-
-    @center.setter
-    def center(self, val):
-        if not hasattr(self, "_center"):
-            self._center = [None, None]
-        self._center[0] = val[0]
-        self._center[1] = val[1]
-
-    @property
-    def x(self):
-        return self.center[0]
-
-    @x.setter
-    def x(self, val):
-        self.center[0] = val
-
-    @property
-    def y(self):
-        return self.center[1]
-
-    @y.setter
-    def y(self, val):
-        self.center[1] = val
 
     @property
     def vel(self):
-        return math.hypot(self.vel_x, self.vel_y)
+        return math.sqrt(self.vel_x ** 2 + self.vel_y ** 2)
 
     @vel.setter
     def vel(self, val):
         self.vel_x = val * math.cos(math.radians(self.vel_direction))
-        self.vel_y = -val * math.sin(math.radians(self.vel_direction))
+        self.vel_y = val * math.sin(math.radians(self.vel_direction))
 
     @property
     def vel_direction(self):
@@ -320,7 +335,7 @@ class fun_Class(object):
     @vel_direction.setter
     def vel_direction(self, val):
         self.vel_x = self.vel * math.cos(math.radians(val))
-        self.vel_y = -self.vel * math.sin(math.radians(val))
+        self.vel_y = self.vel * math.sin(math.radians(val))
 
     @property
     def accln(self):
@@ -329,7 +344,7 @@ class fun_Class(object):
     @accln.setter
     def accln(self, val):
         self.accln_x = val * math.cos(math.radians(self.accln_direction))
-        self.accln_y = -val * math.sin(math.radians(self.accln_direction))
+        self.accln_y = val * math.sin(math.radians(self.accln_direction))
 
     @property
     def accln_direction(self):
@@ -338,52 +353,56 @@ class fun_Class(object):
     @accln_direction.setter
     def accln_direction(self, val):
         self.accln_x = self.accln * math.cos(math.radians(val))
-        self.accln_y = -self.accln * math.sin(math.radians(val))
-
-    def distance(self, x, y):
-        point_ = (x, y)
-        return distance(self.center, point_)
-
-    def vel_add(self, vel_mag, vel_direction):
-        ''' vel_mag -> Magnitude of vel.
-            vel_direction -> direction in degrees.
-            Adds to current velocity and also returns new (vel_mag,vel_dir).'''
-
-        new_vel_mag, new_vel_dir = vel_add(
-            (self.vel, self.vel_direction), (vel_mag, vel_direction))
-        self.vel_set(new_vel_mag, new_vel_dir)
-        return self
-
-    def vel_set(self, vel_mag, vel_dir):
-        self.vel_x = vel_mag * math.cos(math.radians(vel_dir))
-        self.vel_y = -vel_mag * math.sin(math.radians(vel_dir))
-        return self
-
-    def direction(self, x, y):
-        point_ = (x, y)
-        return direction(self.center, point_)
-
-    @property
-    def list_event_local(self):
-        if not hasattr(self, "_list_event_local"):
-            self._list_event_local = []
-        return self._list_event_local
-
-    @list_event_local.setter
-    def list_event_local(self, value):
-        self._list_event_local = value
-
-    dispatch_events_instance = classmethod(event.dispatch_events_instance)
-    dispatch_events_self = event.dispatch_events_self
-    push_event_local = event.push_event_local
-    _push_event_local_single = event._push_event_local_single
-    dispatch_events_local = event.dispatch_events_local
-    clear_event_local = event.clear_event_local
+        self.accln_y = self.accln * math.sin(math.radians(val))
 
     @classmethod
-    def register_action(cls, event_name=None, func_to_register=None):
-        global register_action
-        register_action(event_name, func_to_register, cls)
+    def update_instances(cls, list_event):
+        '''calls update_self for all instances.'''
+        for tmp_instance in cls.list_instance:
+            tmp_instance.update_self(list_event)
+
+    def update_self(self, list_event):
+        # print list_event
+        for each_ev in list_event:
+# print self.dict_action_func
+            if each_ev.type in self.dict_action_func:
+                for each_action in self.dict_action_func[each_ev.type]:
+                    # similar as self.action_step()
+                    each_action(self, each_ev)
+
+    @classmethod
+    def _check_event(cls, ev_name_or_type, new_or_old):
+        ''' ev_name_or_type => name_or_type(numb)_of_event
+            new_or_old => current_event_list or old_event_list '''
+        matched_events = []
+        if new_or_old == "new":
+            list_to_check = cls.game_class.list_event
+        elif new_or_old == "old":
+            list_to_check = cls.game_class.list_event_old
+        else:
+            raise AttributeError("new_or_old must be 'new' or 'old'.")
+        if type(ev_name_or_type) is int:
+            ev_type = ev_name_or_type
+        elif type(ev_name_or_type) is str:
+            ev_name = fuzzy_match_event_name(ev_name_or_type, "event")
+            ev_type = KW_EVENTS_ALL[ev_name]
+        for ev in list_to_check:
+            if ev.type == ev_type:
+                matched_events.append(ev)
+        return matched_events
+
+    @classmethod
+    def check_event(cls, ev_name_or_type):
+        return cls._check_event(ev_name_or_type, "new")
+
+    @classmethod
+    def check_event_old(cls, ev_name_or_type):
+        return cls._check_event(ev_name_or_type, "old")
+
+    @classmethod
+    def register_event(cls, event_name=None, func_to_register=None):
+        global register_event
+        register_event(event_name, func_to_register, cls)
 
     @classmethod
     def for_all_instance(cls, func_to_run, flatten):
@@ -400,8 +419,8 @@ class fun_Class(object):
         return self.sprite.collide(*args, **kwargs)
 
 # always use selfie,not selfie_depreceated most compatible
-# make this classmethod,selfie-ridden register_actions as test
-# @register_action()
+# make this classmethod,selfie-ridden register_events as test
+# @register_event()
     def action_end_step_default(self, ev):
         if not(self.x is None) and not(self.y is None):
             # Set x_prev, y_prev
@@ -415,20 +434,78 @@ class fun_Class(object):
             self.y += self.vel_y
 
     def action_begin_step(self, ev):
+# print "Calling begin_step"
+        pass
+
+    def action_JOY_BUTTON_UP(self, ev):
+        print "calling JOY_BUTTON_UP"
+
+    def action_key_down(self, ev):
+        print "Calling key_down"
+
+    def action_end_step(self, ev):
+# print "Calling end step"
         pass
 
     def action_draw_default(self, ev):
         # print "Drawing"
         self.sprite.draw()
-
-    def action_quit(self, ev):
-        # should be made better / overloaded
-        # IMP: will crash unless weakrefs are used
-        pygame.quit()
     # end of fun_Class
 # Other classes
 
 
+# functions outside all classes
+
+
+# list_to_get is attached to a constant list here
+def get_event_list(event_types=None, further_check_variable_name=None, further_check_value=None, list_to_get=None):
+    ''' Get the required events from the event_list.
+        get_event_list([event_types],[further_check_variable_name],further_check_value=None,list_to_get=fun_Game.list_event):
+        event_types (optional): event_name|list[event_name]
+        get_event_list() -> returns whole event_list(to be precise, list_to_get)
+        get_event_list(events) -> returns event_list(to be precise, list_to_get) filtered to contain only "events"
+        get_event_list([events],further_check_variable_name="var_name",further_check_value=value) ->
+        returns sub-list containing those elements of get_event_list([events]) for which var_name=value
+        Potential candidates for list_to_get ->
+        fun_Game.list_event, fun_Game.list_event_old, fun_Game.list_state_all_buttons, fun_Game.list_state_all_buttons_old'''
+    if list_to_get is None:
+        list_to_get = fun_Game.list_event_old
+    if further_check_variable_name:
+        further_check_enabled = True
+    else:
+        further_check_enabled = False
+    if event_types:
+        if not hasattr(event_types, "__iter__"):
+        # if not iterable, make a list out of it
+            event_types = [event_types]
+
+    def func_filter():
+        list_return = []
+        if not event_types:
+            return list_to_get
+        # all events in fun_Game.list_event have a "type" property
+        for temp_1 in list_to_get:
+            for temp_2 in event_types:
+                if temp_1.type == temp_2:
+                    list_return.append(temp_1)
+        return list_return
+
+    # returns part of temp_list which passes further_check
+    def further_check_filter(temp_list):
+        list_return = []
+        if further_check_enabled:
+            for temp in temp_list:
+                # may raise error if further_check_variable_name is not present
+                # for all members of the list
+                if getattr(temp, further_check_variable_name) == further_check_value:
+                    list_return.append(temp)
+        else:
+            list_return = temp_list
+        return list_return
+    # returns elements common in fun_Game.list_events and events which are
+    # accepted after further_check
+    return further_check_filter(func_filter())
+# end of get_event_list()
 
 # Todo: see below
 # Collision helper event_collision funcs (Done, for circle)

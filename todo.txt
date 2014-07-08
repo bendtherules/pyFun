@@ -1,0 +1,114 @@
+dx,dy for sprites
+mouse.x,mouse.y
+mouse_collision_events
+is_focused func
+
+(do) room
+    (Done) move by wasd
+    (Done) resize about center by +-
+    (Done) ---- resize Working, but problem with ints, need internal floats
+    (Done) show all instances
+    add, delete button
+    (Done) highlight on focus (?)
+    (Done differently) make fake instances, not classes
+    (Done) Create from game.py
+    (Done) all prev actions with mouse
+
+    (Done) export to json
+        ** save ori game.py filename**
+        (Done) save original size and other props, which should be restored while loading after populating loaded shapes 
+    (Done) Load from json, needs seperate inst creation logic
+        () saved map cant depend upon original game.py, reduces portability
+        needs some sort of update from existing map method, think later
+    
+    Create map of certain dimension
+        ** extracted from game.py **
+
+    ** menu - load, new, export **
+    -- fake pygame module for faster map loading --
+    ** color conversion ** 
+    -- Heavy code refactoring --
+    ** grid snapping **
+    
+Serialize pygame.color
+
+    LATER
+    transparent panels
+
+(think) timer
+
+(later) UI
+panel-ish things where x,y is diff from whole screen
+panels dynamically resizable
+extra events for focus, mouse click, keyboard tabbing and value change stuff
+e.g. to have a score sidebar
+
+(done for now) solve circular imports
+
+DOWNLOAD pyqt/pyside books
+Todo: make set of excel funcs with pyxll
+dwnload sp1, vb book and ide
+
+(drawing bug) with non-clearing rect aka contains condition
+
+Use rects retuned from blit to display.update
+(imp) gen_event_IB filters - modify  ev_name and dict, eg below
+IMP - learn how import works
+(later) actual bitmap collision.
+(later) move collisions to sep. module
+
+INSTALL win32api and check boa
+DOWNLOAD Editors such as wxDesigner, wxrcedit, XRCed and wxWorkshop 
+
+(todo, add warning) pygame.locals has pygame.Rect. So, importing that may overload sprite_types.Rect. fix this in base.py
+state machine
+fix tiltedrect,img, line,ellipse,point,tri
+
+filters:
+key_press - cnvrt "mod" to list,
+mouse - cnvrt btn_id to btn_name, 
+mouse - mod get_btn_name  to include 4 and 5 scroll ids.
+look for more
+
+(imp) draw_ext
+add TEXT class, open all shape drawing and rect filling api
+(think) all in_place operators should return self, i.e. chainable
+(think) use from_container_obj classmethod for all sprite creation and cnstrctr for standalone use
+(think) move key and mouse funcs from event.py to seperate modules
+(think) asset management
+(think) views
+(think) physics
+(think) brython
+
+(think) use key_names instead of id, sort it out
+(later) make fun_Game instances global
+(later) make fun_Game instance singleton (??) or maybe needs no instantiation (seems better, everything class,ethod and classprop)
+(later) some action plugins for common scenarios
+(later) unregister classes
+
+(Done) distance and angle, motion_add funcs
+(Done, but draw-update rect solves both) blit at int(x),int(y)
+(Done) default action_close
+(Done) top-level custom event generator working
+(Done) event XXgeneratorXX / pushing at XX(class) [Not sure how to implement]XX and instance level
+(done) img - implement collision_mask with existing shapes,
+(done)mouse_press events
+(done) fix check_event-ish func (soln- moved to event), also old key_press_states
+(done) Fixed rect,circle.
+(done) *explicit blit print always showing, when more than 1 obj
+(done) *not implemented completely.
+knowing about others(Done)
+(done) more collision like GM
+(Done) in-built hspeed, vspeed, direction, speed,accln, x_prev, y_prev, x_start, y_start
+(Done) Circle(params).update for not still_valid old_rects -> optimize, maybe save bbox in list instead of creating for each old one
+(Done) fix putting "still_valid" within dict_update used for marking (added note, was actually a good idea, Done)
+
+
+why the heck 60fps flickering -> in-built recording mechanism?
+forum discussion=> display.flip fixes it
+
+clear_rect+new_drawn_rect passed to update -> optimize? (for later, have to ask)
+
+
+
+make graphical glitches by removing few  updates_display :D

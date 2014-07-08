@@ -1,0 +1,148 @@
+{
+    "instance_data": [
+        {
+            "game_class": "wall", 
+            "config": {
+                "color": null, 
+                "center": [
+                    121, 
+                    183
+                ], 
+                "size": [
+                    60, 
+                    40
+                ]
+            }, 
+            "game_shape_class": "Rect"
+        }, 
+        {
+            "game_class": "ball", 
+            "config": {
+                "color": null, 
+                "center": [
+                    175, 
+                    76
+                ], 
+                "size": [
+                    80, 
+                    40
+                ]
+            }, 
+            "game_shape_class": "Rect"
+        }, 
+        {
+            "game_class": "wall", 
+            "config": {
+                "color": null, 
+                "center": [
+                    62, 
+                    182
+                ], 
+                "size": [
+                    60, 
+                    40
+                ]
+            }, 
+            "game_shape_class": "Rect"
+        }, 
+        {
+            "game_class": "wall", 
+            "config": {
+                "color": null, 
+                "center": [
+                    54, 
+                    137
+                ], 
+                "size": [
+                    60, 
+                    40
+                ]
+            }, 
+            "game_shape_class": "Rect"
+        }, 
+        {
+            "game_class": "wall", 
+            "config": {
+                "color": null, 
+                "center": [
+                    120, 
+                    144
+                ], 
+                "size": [
+                    60, 
+                    40
+                ]
+            }, 
+            "game_shape_class": "Rect"
+        }, 
+        {
+            "game_class": "ball", 
+            "config": {
+                "color": null, 
+                "center": [
+                    104, 
+                    88
+                ], 
+                "size": [
+                    80, 
+                    40
+                ]
+            }, 
+            "game_shape_class": "Rect"
+        }, 
+        {
+            "game_class": "ball", 
+            "config": {
+                "color": null, 
+                "center": [
+                    72, 
+                    224
+                ], 
+                "size": [
+                    80, 
+                    40
+                ]
+            }, 
+            "game_shape_class": "Rect"
+        }, 
+        {
+            "game_class": "ball", 
+            "config": {
+                "color": null, 
+                "center": [
+                    177, 
+                    169
+                ], 
+                "size": [
+                    80, 
+                    40
+                ]
+            }, 
+            "game_shape_class": "Rect"
+        }
+    ], 
+    "class_data": [
+        {
+            "game_class": "wall", 
+            "params": {
+                "color": null, 
+                "size": [
+                    60, 
+                    40
+                ]
+            }, 
+            "game_shape_class": "Rect"
+        }, 
+        {
+            "game_class": "ball", 
+            "params": {
+                "color": null, 
+                "size": [
+                    80, 
+                    40
+                ]
+            }, 
+            "game_shape_class": "Rect"
+        }
+    ]
+}

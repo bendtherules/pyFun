@@ -1,0 +1,141 @@
+from utils import KW_EVENTS, fuzzy_match_event_name
+from functools import partial
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
+
+class fun_Class(object):
+    # dict_action_func -> dict of action funcs, key=event_numb like KEYDOWN
+    dict_action_func = {}
+
+    @classmethod
+    def register_event(cls, event_name=None, func_to_register=None):
+        '''
+            @fun_Class.register_event()
+            def event_key_down(ev):
+                pass
+            OR
+            @fun_Class.register_event(event_name) # event_name=KEYDOWN (or "key_down")
+            def whatever(ev):
+                pass
+            OR
+            fun_Class.register_event(event_name,func)
+        '''
+        if hasattr(func_to_register, "im_class"):
+            print("im_class=")
+            print func_to_register.im_class,func_to_register.imelf,
+        if (event_name is None) and (func_to_register is None):
+            # i.e No param passed, used as decorator (1st step of ex. 1)
+            logging.info("Nothing passed")
+            return cls.register_event
+        elif (not(event_name is None)) and (func_to_register is None):
+            # i.e. one param is passed, maybe func or (str or int)
+            logging.info("Event Name only passed")
+            if isinstance(event_name, int) or isinstance(event_name, str):
+                # i.e. 1st parm-> str or int, is event name, acts as decorator
+                # (2nd ex.)
+                # dont hardcode func name- use metaclass
+                logging.info("Event Name is event_name")
+                return partial(cls.register_event, event_name)
+            elif hasattr(event_name, "__call__"):
+                # first param is func, actually func_to_register.
+                # So get event_name from func_name (2nd step of 1st ex.)
+                logging.info("Event Name is actually func")
+                func_to_register = event_name
+                event_name = fuzzy_match_event_name(func_to_register.func_name)
+                return cls.register_event(event_name, func_to_register)
+            else:
+                raise TypeError("event_name must be (str or int) or func")
+        else:
+            # Both params present
+            logging.info("Both param passed")
+
+            if isinstance(event_name, str):
+                event_name = fuzzy_match_event_name(event_name)
+                event_numb = KW_EVENTS[event_name]
+            elif isinstance(event_name, int):
+                event_numb = event_name
+            else:
+                raise TypeError("event_name should be str or int")
+
+            logging.info("Registering func")
+            if not (event_numb in cls.dict_action_func):
+                cls.dict_action_func[event_numb] = []
+            cls.dict_action_func[event_numb].append(func_to_register)
+
+            # logging.debug(func_to_register)
+            return func_to_register
+
+
+class child(fun_Class):
+    pass
+
+
+@child.register_event("key_down")
+def ev_arbit(self):
+    pass
+logging.info(fun_Class.dict_action_func)
+logging.info(child.dict_action_func)
+
+
+class child2(fun_Class):
+
+    @fun_Class.register_event("key_down")
+    def ev_arbit_2(self):
+        pass
+logging.info(fun_Class.dict_action_func)
+logging.info(child2.dict_action_func)
+
+# Test 1
+
+# logging.info("\nRunning Test 1")
+
+
+# @fun_Class.register_event("KEydown")
+# def ev_arbit():
+#     pass
+# logging.info(ev_arbit)
+
+# Test 1.1
+
+# logging.info("\nRunning Test 1.1")
+
+
+# @fun_Class.register_event("KEydown")
+# def ev_arbit_2():
+#     pass
+# logging.info(fun_Class.dict_action_func)
+# logging.info(ev_arbit_2)
+
+# Test 2
+
+# logging.info("\nRunning Test 2")
+
+
+# @fun_Class.register_event
+# def ev_key_up():
+#     pass
+# logging.info(fun_Class.dict_action_func)
+# logging.info(ev_key_up)
+
+# Test 3
+# logging.info("\nRunning Test 3")
+
+
+# def test_mousemotion():
+#     pass
+# test_mousemotion = fun_Class.register_event(test_mousemotion)
+# logging.info(fun_Class.dict_action_func)
+# logging.info(test_mousemotion)
+
+# Test 4
+
+# logging.info("\nRunning Test 4")
+
+
+# def test_wat():
+#     pass
+# test_wat = fun_Class.register_event("mousemotion", test_wat)
+# logging.info(fun_Class.dict_action_func)
+# logging.info(test_wat)
