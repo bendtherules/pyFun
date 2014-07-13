@@ -20,14 +20,12 @@ class MyFrame(wx.Frame):
         self.bind_events_default()
 
         self.load_saved_json()
-        # todo: make load_module_py func
+        # done: make load_module_py func
 
     def load_saved_json(self):
         # Load map
-        wildcard_py = "Python source (*.py)|*.py|" \
-            "Compiled Python (*.pyc)|*.pyc|" \
+        wildcard_json = "Json file (*.json)|*.json|" \
             "All files (*.*)|*.*"
-        wildcard_json = "Json file (*.json)|*.json"
         dialog_file = wx.FileDialog(None, "Choose game.py file", os.getcwd(),
                                     "", wildcard_json, wx.OPEN)
         if dialog_file.ShowModal() == wx.ID_OK:
@@ -46,6 +44,31 @@ class MyFrame(wx.Frame):
 
         self.sync_panel_ctrl(self.dict_loaded_cls.keys())
         self.generate_loaded_inst(data_loaded_inst)
+        dialog_file.Destroy()
+
+    def load_module_py(self):
+        # Load map
+        wildcard_py = "Python source (*.py)|*.py|" \
+            "Compiled Python (*.pyc)|*.pyc|" \
+            "All files (*.*)|*.*"
+        dialog_file = wx.FileDialog(None, "Choose game.py file", os.getcwd(),
+                                    "", wildcard_py, wx.OPEN)
+        if dialog_file.ShowModal() == wx.ID_OK:
+            self.module_path = dialog_file.GetPath()
+            filename = os.path.basename(self.module_path)
+            filename_without_ext = filename[:filename.rfind(".")]
+            filepath = os.path.dirname(self.module_path)
+            list_loaded_cls = load_map.load_module(
+                filename_without_ext, filepath)
+            self.dict_loaded_cls = {}
+            for each_cls in list_loaded_cls:
+                self.dict_loaded_cls[each_cls.__name__] = each_cls
+            del list_loaded_cls
+        else:
+            raise TypeError("Enter a filename to proceed")
+
+        self.sync_panel_ctrl(self.dict_loaded_cls.keys())
+
         dialog_file.Destroy()
 
     def create_panel_ctrl_canvas(self):

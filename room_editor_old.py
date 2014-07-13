@@ -25,7 +25,23 @@ class MyFrame(wx.Frame):
         # create the list control
         self.panel_ctrl.list_ctrl = wx.ListCtrl(
             self.panel_ctrl, -1, style=wx.LC_LIST, size=(200, 180))
-        # self.list_shape = []
+
+        self.load_module_py()
+        # assign the image list to it
+        # self.panel_ctrl.list_ctrl.AssignImageList(il, wx.IMAGE_LIST_SMALL)
+        self.panel_canvas = wx.Panel(
+            self, -1, size=(-3, -1))
+        self.panel_canvas.SetBackgroundColour("light blue")
+
+        bxszr = wx.BoxSizer(wx.HORIZONTAL)
+        bxszr.Add(self.panel_ctrl, 2, flag=wx.EXPAND)
+        bxszr.Add(self.panel_canvas, 3, flag=wx.EXPAND)
+        self.SetSizer(bxszr)
+        # self.Fit()
+
+        self.bind_events_default()
+
+    def load_module_py(self):
         # Load map
         wildcard_py = "Python source (*.py)|*.py|" \
             "Compiled Python (*.pyc)|*.pyc|" \
@@ -49,19 +65,6 @@ class MyFrame(wx.Frame):
         self.sync_panel_ctrl(self.dict_loaded_cls.keys())
 
         dialog_file.Destroy()
-        # assign the image list to it
-        # self.panel_ctrl.list_ctrl.AssignImageList(il, wx.IMAGE_LIST_SMALL)
-        self.panel_canvas = wx.Panel(
-            self, -1, size=(-3, -1))
-        self.panel_canvas.SetBackgroundColour("light blue")
-
-        bxszr = wx.BoxSizer(wx.HORIZONTAL)
-        bxszr.Add(self.panel_ctrl, 2, flag=wx.EXPAND)
-        bxszr.Add(self.panel_canvas, 3, flag=wx.EXPAND)
-        self.SetSizer(bxszr)
-        # self.Fit()
-
-        self.bind_events_default()
 
     def sync_panel_ctrl(self, list_str):
         for index, str_ in enumerate(list_str):

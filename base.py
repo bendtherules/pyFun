@@ -12,6 +12,7 @@ import logging
 from copy import deepcopy
 from math_utils import atan2_inv, distance, vel_add, direction
 import event
+import sys
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -260,7 +261,7 @@ class fun_Class(object):
         self.y_prev = y
         self.vel_x, self.vel_y, self.accln_x, self.accln_y = 0, 0, 0, 0
 
-        if (self.sprite_defaults and self.sprite_defaults.get("type")):
+        if (hasattr(self, "sprite_defaults") and self.sprite_defaults.get("type")):
             if (x is None) or (y is None):
                 raise AttributeError(
                     "fun_Class with sprite_defaults must have x,y")
@@ -424,7 +425,8 @@ class fun_Class(object):
     def action_quit(self, ev):
         # should be made better / overloaded
         # IMP: will crash unless weakrefs are used
-        pygame.quit()
+        # pygame.quit()
+        sys.exit()
     # end of fun_Class
 # Other classes
 

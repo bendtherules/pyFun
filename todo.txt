@@ -1,3 +1,9 @@
+can switch, but getting progressively very slow. probably some sort of nested copy getting very slow 
+    -- line 156 copy_old_sprite = deepcopy(tmp_old_sprite)
+    -- len(list_clear_rect) == step no.
+
+(check) clear blitted rects for all deleted instances
+
 dx,dy for sprites
 mouse.x,mouse.y
 mouse_collision_events
@@ -24,18 +30,19 @@ is_focused func
     Create map of certain dimension
         ** extracted from game.py **
 
+    copy,paste,delete panels
     ** menu - load, new, export **
+    -Serialize pygame.color-
     -- fake pygame module for faster map loading --
     ** color conversion ** 
-    -- Heavy code refactoring --
+    -- Heavy code refactoring using old state machine --
     ** grid snapping **
     
-Serialize pygame.color
 
     LATER
     transparent panels
 
-(think) timer
+(doing) timer (module done, needs integration)
 
 (later) UI
 panel-ish things where x,y is diff from whole screen
@@ -45,6 +52,8 @@ e.g. to have a score sidebar
 
 (done for now) solve circular imports
 
+SEARCH visual python profiler
+
 DOWNLOAD pyqt/pyside books
 Todo: make set of excel funcs with pyxll
 dwnload sp1, vb book and ide
@@ -53,12 +62,9 @@ dwnload sp1, vb book and ide
 
 Use rects retuned from blit to display.update
 (imp) gen_event_IB filters - modify  ev_name and dict, eg below
-IMP - learn how import works
+(done) - learn how import works
 (later) actual bitmap collision.
 (later) move collisions to sep. module
-
-INSTALL win32api and check boa
-DOWNLOAD Editors such as wxDesigner, wxrcedit, XRCed and wxWorkshop 
 
 (todo, add warning) pygame.locals has pygame.Rect. So, importing that may overload sprite_types.Rect. fix this in base.py
 state machine
